@@ -1,0 +1,23 @@
+{
+  "name": "generator-generator-pj-angular",
+  "version": "0.0.0",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "jelisejev/generator-generator-pj-angular",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": "https://github.com/jelisejev"
+  },
+  "files": [
+    "directive-spec"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "lodash": "^3.7.0",
+    "yeoman-generator": "^0.19.2"
+  }
+}
