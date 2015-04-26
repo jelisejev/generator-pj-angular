@@ -1,9 +1,11 @@
 describe('<%=camelCaseName %>', function() {
     var $compile, $rootScope;
 
-    beforeEach(inject(function(_$compile_, _$rootScope_) {
+    beforeEach(inject(function(_$compile_, _$rootScope_<% services.forEach(function(service) { %>, <%=service %><% }) %>) {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
+        <% services.forEach(function(service) { %><%=service %> = _<%=service %>_
+        <% }) %>
     }));
 
     function compile(scope) {

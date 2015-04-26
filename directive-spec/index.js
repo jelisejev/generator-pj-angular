@@ -14,6 +14,11 @@ module.exports = yeoman.generators.Base.extend({
       type: String,
       desc: 'Name of the directive'
     });
+    this.option('mock', {
+      required: false,
+      type: String,
+      desc: 'Comma separated list of services to mock'
+    });
 
   },
 
@@ -25,7 +30,8 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath(camelCaseName + 'Spec.js'),
       {
         name: this.name,
-        camelCaseName: camelCaseName
+        camelCaseName: camelCaseName,
+        services: this.options.mock ? this.options.mock.split(',') : []
       }
     );
   }
