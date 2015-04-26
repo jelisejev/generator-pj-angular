@@ -19,11 +19,22 @@ module.exports = yeoman.generators.Base.extend({
       type: String,
       desc: 'Comma separated list of services to mock'
     });
+    this.option('mock-http', {
+      required: false,
+      type: Boolean,
+      desc: 'Whether to mock the HTTP backend'
+    });
 
   },
 
   writing: function () {
     var camelCaseName = _.camelCase(this.name);
+
+    var services = this.options.mock ? this.options.mock.split(',') : [];
+
+    if (this.options.mockHttp) {
+      services.push('$httpBackend');
+    }
 
     this.fs.copyTpl(
       this.templatePath('directive-spec.js'),
@@ -31,7 +42,8 @@ module.exports = yeoman.generators.Base.extend({
       {
         name: this.name,
         camelCaseName: camelCaseName,
-        services: this.options.mock ? this.options.mock.split(',') : []
+        services: services,
+        mockHttp: this.options.mockHttp
       }
     );
   }

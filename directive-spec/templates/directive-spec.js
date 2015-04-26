@@ -1,11 +1,12 @@
 describe('<%=camelCaseName %>', function() {
-    var $compile, $rootScope;
+    var $compile, $rootScope<% services.forEach(function(service) { %>, <%=service %><% }) %>;
 
-    beforeEach(inject(function(_$compile_, _$rootScope_<% services.forEach(function(service) { %>, <%=service %><% }) %>) {
+    beforeEach(inject(function(_$compile_, _$rootScope_<% services.forEach(function(service) { %>, _<%=service %>_<% }) %>) {
         $compile = _$compile_;
-        $rootScope = _$rootScope_;
-        <% services.forEach(function(service) { %><%=service %> = _<%=service %>_
-        <% }) %>
+        $rootScope = _$rootScope_;<% services.forEach(function(service) { %>
+        <%=service %> = _<%=service %>_;<% }) %><% if(mockHttp){ %>
+
+        $httpBackend.expectGET('rest/').respond(200, {});<% } %>
     }));
 
     function compile(scope) {
@@ -20,6 +21,15 @@ describe('<%=camelCaseName %>', function() {
 
     it('should be rendered correctly', function() {
         var scope = $rootScope.$new();
-        var elem = compile(scope);
-    });
+        var elem = compile(scope);<% if(mockHttp){ %>
+
+        $httpBackend.flush();<% } %>
+
+
+    });<% if(mockHttp){ %>
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });<% } %>
 });
