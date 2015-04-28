@@ -31,6 +31,7 @@ module.exports = yeoman.generators.Base.extend({
     var camelCaseName = _.camelCase(this.name);
 
     var services = this.options.mock ? this.options.mock.split(',') : [];
+    services.unshift('$rootScope', '$compile');
 
     if (this.options.mockHttp) {
       services.push('$httpBackend');

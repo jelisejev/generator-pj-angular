@@ -1,11 +1,9 @@
 describe('<%=camelCaseName %>', function() {
-    var $compile, $rootScope<% services.forEach(function(service) { %>, <%=service %><% }) %>;
+    var <%=services.join(', ') %>;
 
     beforeEach(module('moduleName'));
 
-    beforeEach(inject(function(_$compile_, _$rootScope_<% services.forEach(function(service) { %>, _<%=service %>_<% }) %>) {
-        $compile = _$compile_;
-        $rootScope = _$rootScope_;<% services.forEach(function(service) { %>
+    beforeEach(inject(function(<%=services.map(function(service){ return '_' + service + '_' }).join(', ') %>) {<% services.forEach(function(service) { %>
         <%=service %> = _<%=service %>_;<% }) %><% if(mockHttp){ %>
 
         $httpBackend.expectGET('rest/').respond(200, {});<% } %>
