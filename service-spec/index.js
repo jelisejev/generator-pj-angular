@@ -38,11 +38,9 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
-    var camelCaseName = _.camelCase(this.name);
-
     var methods = this.options.methods ? this.options.methods.split(',') : ['someMethod'];
     var services = this.options.mock ? this.options.mock.split(',') : [];
-    services.push(camelCaseName);
+    services.push(this.name);
 
     if (this.options.mockHttp) {
       services.push('$httpBackend');
@@ -50,10 +48,9 @@ module.exports = yeoman.generators.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath('service-spec.js'),
-      this.destinationPath(camelCaseName + 'Spec.js'),
+      this.destinationPath(this.name + 'Spec.js'),
       {
         name: this.name,
-        camelCaseName: camelCaseName,
         services: services,
         mockHttp: this.options.mockHttp,
         module: this.module,

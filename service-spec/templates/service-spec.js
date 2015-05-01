@@ -1,4 +1,4 @@
-describe('<%=camelCaseName %>', function() {
+describe('<%=name %>', function() {
     var <%=services.join(', ') %>;
 
     beforeEach(module('<%=module %>'));
