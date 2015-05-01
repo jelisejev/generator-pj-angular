@@ -22,9 +22,8 @@ describe('<%=name %>', function() {<% services.forEach(function(service) { %>
 
     it('should initially run correctly', function() {
         var scope = $rootScope.$new();
-        var controller = controller(scope);<% if(templateUrl) { %>
-        var elem = compile(scope)<% if(mockHttp){ %>
-        <% } %>
+        var ctrl = controller(scope);<% if(templateUrl) { %>
+        var elem = compile(scope);<% } %><% if(mockHttp){ %>
 
         $httpBackend.flush();<% } %>
 
