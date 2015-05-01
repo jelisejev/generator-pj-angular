@@ -9,6 +9,11 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: function () {
+    this.argument('module', {
+      required: true,
+      type: String,
+      desc: 'Name of the module'
+    });
     this.argument('name', {
       required: true,
       type: String,
@@ -44,7 +49,8 @@ module.exports = yeoman.generators.Base.extend({
         name: this.name,
         camelCaseName: camelCaseName,
         services: services,
-        mockHttp: this.options.mockHttp
+        mockHttp: this.options.mockHttp,
+        module: this.module
       }
     );
   }
