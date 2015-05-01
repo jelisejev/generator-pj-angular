@@ -6,9 +6,7 @@ module.exports = yeoman.generators.Base.extend({
 
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
-  },
 
-  prompting: function () {
     this.argument('module', {
       required: true,
       type: String,
@@ -22,24 +20,23 @@ module.exports = yeoman.generators.Base.extend({
     this.option('methods', {
       required: false,
       type: String,
-      desc: 'Comma separated list of service methods'
+      desc: 'Comma separated list of service methods to test'
     });
-    this.option('mock', {
+    this.option('inject', {
       required: false,
       type: String,
-      desc: 'Comma separated list of services to mock'
+      desc: 'Comma separated list of services to inject'
     });
     this.option('mock-http', {
       required: false,
       type: Boolean,
       desc: 'Whether to mock the HTTP backend'
     });
-
   },
 
   writing: function () {
     var methods = this.options.methods ? this.options.methods.split(',') : ['someMethod'];
-    var services = this.options.mock ? this.options.mock.split(',') : [];
+    var services = this.options.inject ? this.options.inject.split(',') : [];
     services.push(this.name);
 
     if (this.options.mockHttp) {

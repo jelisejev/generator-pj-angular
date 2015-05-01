@@ -6,9 +6,7 @@ module.exports = yeoman.generators.Base.extend({
 
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
-  },
 
-  prompting: function () {
     this.argument('module', {
       required: true,
       type: String,
@@ -17,7 +15,7 @@ module.exports = yeoman.generators.Base.extend({
     this.argument('name', {
       required: true,
       type: String,
-      desc: 'Name of the directive'
+      desc: 'Name of the directive in snake case'
     });
     this.option('inject', {
       required: false,
@@ -29,7 +27,6 @@ module.exports = yeoman.generators.Base.extend({
       type: Boolean,
       desc: 'Whether to mock the HTTP backend'
     });
-
   },
 
   writing: function () {
