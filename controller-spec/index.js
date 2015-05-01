@@ -17,12 +17,12 @@ module.exports = yeoman.generators.Base.extend({
     this.argument('name', {
       required: true,
       type: String,
-      desc: 'Name of the service'
+      desc: 'Name of the controller'
     });
-    this.option('methods', {
+    this.option('template-url', {
       required: false,
       type: String,
-      desc: 'Comma separated list of service methods'
+      desc: 'URL of a template to test together with the controller'
     });
     this.option('mock', {
       required: false,
@@ -38,26 +38,26 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
-    var camelCaseName = _.camelCase(this.name);
-
-    var methods = this.options.methods ? this.options.methods.split(',') : ['someMethod'];
     var services = this.options.mock ? this.options.mock.split(',') : [];
-    services.push(camelCaseName);
+    services.unshift('$rootScope', '$controller');
 
     if (this.options.mockHttp) {
       services.push('$httpBackend');
     }
 
+    if (this.options.templateUrl) {
+      services.unshift('$compile', '$templateCache');
+    }
+
     this.fs.copyTpl(
-      this.templatePath('service-spec.js'),
-      this.destinationPath(camelCaseName + 'Spec.js'),
+      this.templatePath('controller-spec.js'),
+      this.destinationPath(this.name + 'Spec.js'),
       {
         name: this.name,
-        camelCaseName: camelCaseName,
         services: services,
         mockHttp: this.options.mockHttp,
         module: this.module,
-        methods: methods,
+        templateUrl: this.options.templateUrl
       }
     );
   }

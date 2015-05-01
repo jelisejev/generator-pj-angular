@@ -1,4 +1,4 @@
-describe('<%=camelCaseName %>', function() {
+describe('<%=name %>', function() {
     var <%=services.join(', ') %>;
 
     beforeEach(module('<%=module %>'));
@@ -9,19 +9,22 @@ describe('<%=camelCaseName %>', function() {
         $httpBackend.expectGET('rest/').respond(200, {});<% } %>
     }));
 
+    function controller(scope) {
+        return $controller('<%=name %>', {
+            '$scope': scope
+        });
+    }<% if(templateUrl) { %>
+
     function compile(scope) {
-        scope = scope || $rootScope.$new();
-        var elem = '<<%=name %>></<%=name %>>';
-
-        elem = $compile(elem)(scope);
-        scope.$digest();
-
-        return elem;
+        return $compile($templateCache.get('<%=templateUrl %>'))(scope);
     }
+    <% } %>
 
-    it('should be rendered correctly', function() {
+    it('should initially run correctly', function() {
         var scope = $rootScope.$new();
-        var elem = compile(scope);<% if(mockHttp){ %>
+        var controller = controller(scope);<% if(templateUrl) { %>
+        var elem = compile(scope)<% if(mockHttp){ %>
+        <% } %>
 
         $httpBackend.flush();<% } %>
 

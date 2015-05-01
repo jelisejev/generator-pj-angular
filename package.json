@@ -11,7 +11,9 @@
     "url": "https://github.com/jelisejev"
   },
   "files": [
-    "directive-spec"
+    "directive-spec",
+    "service-spec",
+    "controller-spec"
   ],
   "keywords": [
     "yeoman-generator"

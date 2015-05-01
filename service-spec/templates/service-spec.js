@@ -1,7 +1,7 @@
 describe('<%=camelCaseName %>', function() {
     var <%=services.join(', ') %>;
 
-    beforeEach(module(<%=module %>));
+    beforeEach(module('<%=module %>'));
 
     beforeEach(inject(function(<%=services.map(function(service){ return '_' + service + '_' }).join(', ') %>) {<% services.forEach(function(service) { %>
         <%=service %> = _<%=service %>_;<% }) %>
