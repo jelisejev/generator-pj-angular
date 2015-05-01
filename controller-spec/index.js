@@ -24,10 +24,10 @@ module.exports = yeoman.generators.Base.extend({
       type: String,
       desc: 'URL of a template to test together with the controller'
     });
-    this.option('mock', {
+    this.option('inject', {
       required: false,
       type: String,
-      desc: 'Comma separated list of services to mock'
+      desc: 'Comma separated list of services to inject'
     });
     this.option('mock-http', {
       required: false,
@@ -38,7 +38,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
-    var services = this.options.mock ? this.options.mock.split(',') : [];
+    var services = this.options.inject ? this.options.inject.split(',') : [];
     services.unshift('$rootScope', '$controller');
 
     if (this.options.mockHttp) {

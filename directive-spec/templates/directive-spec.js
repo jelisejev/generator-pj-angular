@@ -1,5 +1,5 @@
-describe('<%=camelCaseName %>', function() {
-    var <%=services.join(', ') %>;
+describe('<%=camelCaseName %>', function() {<% services.forEach(function(service) { %>
+    var <%=service %>;<% }) %>
 
     beforeEach(module('<%=module %>'));
 
