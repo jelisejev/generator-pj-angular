@@ -3,6 +3,13 @@ A Yeoman generator for generating various Angular JS components.
 
 ## Installation
 
+```bash
+git clone https://github.com/jelisejev/generator-pj-angular.git
+cd generator-pj-angular
+npm install
+npm link
+```
+
 ## Generators
 The following generators are provided.
 ### service-spec
